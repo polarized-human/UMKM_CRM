@@ -1,0 +1,201 @@
+/* =========================================
+   UI COMPONENTS (TierBadge, Toast, Modal)
+========================================= */
+
+/* --- TIER BADGE --- */
+.tier-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid;
+}
+.tier-badge.platinum { background: rgba(167, 139, 250, 0.1); color: #c4b5fd; border-color: rgba(167, 139, 250, 0.2); }
+.tier-badge.gold { background: rgba(251, 191, 36, 0.1); color: #fcd34d; border-color: rgba(251, 191, 36, 0.2); }
+.tier-badge.silver { background: rgba(203, 213, 225, 0.1); color: #e2e8f0; border-color: rgba(203, 213, 225, 0.2); }
+.tier-badge.bronze { background: rgba(234, 88, 12, 0.1); color: #fdba74; border-color: rgba(234, 88, 12, 0.2); }
+
+/* --- TIER RING (AVATAR) --- */
+.tier-ring-wrapper {
+  position: relative;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.tier-ring-wrapper.sm { width: 40px; height: 40px; border: 2px solid; }
+.tier-ring-wrapper.md { width: 56px; height: 56px; border: 3px solid; }
+.tier-ring-wrapper.lg { width: 80px; height: 80px; border: 4px solid; }
+
+.tier-ring-wrapper.platinum { border-color: #a855f7; }
+.tier-ring-wrapper.gold { border-color: #fbbf24; }
+.tier-ring-wrapper.silver { border-color: #94a3b8; }
+.tier-ring-wrapper.bronze { border-color: #ea580c; }
+
+.avatar-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid #0a0a0f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #000;
+  background-color: #a7f3d0; 
+  overflow: hidden; /* Tambahkan baris ini agar gambar tidak keluar dari lingkaran */
+}
+
+/* Tambahkan baris ini untuk mengatur ukuran foto */
+.avatar-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- TOAST --- */
+.toast-container {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  pointer-events: none; /* Agar tidak menghalangi klik jika kosong */
+}
+
+.toast-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-radius: 0.75rem;
+  background-color: #1e1e2d;
+  color: #fff;
+  box-shadow: 0 10px 20px -5px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.05);
+  animation: slideInUp 0.3s ease-out forwards;
+  pointer-events: auto;
+}
+
+.toast-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.toast-icon.success { background: #10b981; color: white; box-shadow: 0 0 12px rgba(16, 185, 129, 0.4); }
+.toast-icon.error { background: #ef4444; color: white; box-shadow: 0 0 12px rgba(239, 68, 68, 0.4); }
+
+@keyframes slideInUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* --- CONFIRM MODAL --- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 5000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.modal-box {
+  background: #12121a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  animation: modalPop 0.2s ease-out;
+}
+
+@keyframes modalPop {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-title { font-size: 1.125rem; font-weight: bold; color: #fff; margin-bottom: 0.5rem; }
+.modal-desc { font-size: 0.875rem; color: rgba(255, 255, 255, 0.5); margin-bottom: 1.5rem; line-height: 1.5; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 0.75rem; }
+
+.btn-modal-cancel {
+  padding: 0.6rem 1rem; border-radius: 0.5rem; background: rgba(255, 255, 255, 0.05);
+  color: white; border: 1px solid rgba(255, 255, 255, 0.1); cursor: pointer; transition: 0.2s; font-size: 0.875rem;
+}
+.btn-modal-cancel:hover { background: rgba(255, 255, 255, 0.1); }
+
+.btn-modal-danger {
+  padding: 0.6rem 1rem; border-radius: 0.5rem; background: #ef4444; color: white;
+  border: none; cursor: pointer; transition: 0.2s; font-size: 0.875rem; font-weight: 500;
+}
+.btn-modal-danger:hover { background: #dc2626; }
+
+.btn-modal-confirm {
+  padding: 0.6rem 1rem; border-radius: 0.5rem; background: linear-gradient(to right, #f59e0b, #f97316);
+  color: black; border: none; cursor: pointer; transition: 0.2s; font-size: 0.875rem; font-weight: 600;
+}
+.btn-modal-confirm:hover { opacity: 0.9; }
+
+/* --- DIGITAL MEMBER CARD --- */
+.digital-card {
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 1.586 / 1; /* Rasio standar kartu kredit ATM */
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  color: white;
+  box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease;
+}
+
+.digital-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Efek Kilau/Kaca pada Kartu */
+.digital-card::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Warna Kartu Berdasarkan Tier */
+.card-bg-platinum { background: linear-gradient(135deg, #a78bfa, #4c1d95); }
+.card-bg-gold { background: linear-gradient(135deg, #fbbf24, #b45309); }
+.card-bg-silver { background: linear-gradient(135deg, #cbd5e1, #334155); }
+.card-bg-bronze { background: linear-gradient(135deg, #ea580c, #7c2d12); }
+
+/* Tata Letak Dalam Kartu */
+.card-top { display: flex; justify-content: space-between; align-items: flex-start; z-index: 2; }
+.card-logo { display: flex; align-items: center; gap: 0.5rem; font-weight: 800; font-size: 1.1rem; }
+.card-tier { font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; background: rgba(0,0,0,0.25); padding: 0.3rem 0.75rem; border-radius: 999px; }
+
+.card-bottom { display: flex; justify-content: space-between; align-items: flex-end; z-index: 2; }
+.card-user-info { display: flex; flex-direction: column; }
+.card-name { font-size: 1.2rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.25rem; }
+.card-id { font-size: 0.85rem; font-family: monospace; letter-spacing: 2px; opacity: 0.8; }
+
+/* Kotak QR Code di dalam Kartu */
+.card-qr { width: 65px; height: 65px; background: white; padding: 0.4rem; border-radius: 0.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+.card-qr img { width: 100%; height: 100%; object-fit: cover; }
