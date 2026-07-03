@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { X, QrCode } from "lucide-react";
-import "@/css/ui/style.css";
+import "@/css/cashier/components.css";
 
 interface QRModalProps {
   isOpen: boolean;

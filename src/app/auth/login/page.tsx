@@ -10,8 +10,10 @@ export default function LoginPage() {
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ email: "", password: "" });
+  const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
   const [stars, setStars] = useState<React.CSSProperties[]>([]);
   const router = useRouter();
+  const baseUrl = '/api';
 
   useEffect(() => {
     setStars([...Array(35)].map(() => ({
@@ -25,11 +27,17 @@ export default function LoginPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const newErrors: { email?: string; password?: string } = {};
+    if (!form.email.trim()) newErrors.email = "Kolom wajib diisi";
+    if (!form.password.trim()) newErrors.password = "Kolom wajib diisi";
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) return;
+
     setLoading(true);
     
     try {
-
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
+      const response = await fetch(`${baseUrl}/login`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json', 
@@ -45,17 +53,14 @@ export default function LoginPage() {
         throw new Error(data.message || "Email atau password salah.");
       }
 
-      // Menyimpan token akses dari Laravel (Sanctum/JWT) ke LocalStorage
       if (data.access_token) {
         localStorage.setItem('auth_token', data.access_token);
       }
 
-      // Mengarahkan langsung ke halaman kasir
       router.push('/cashier');
-      
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      alert("Gagal masuk. Periksa kembali email dan password Anda.");
+      alert(error.message || "Gagal masuk. Periksa kembali email dan password Anda.");
     } finally {
       setLoading(false);
     }
@@ -71,17 +76,17 @@ export default function LoginPage() {
         {stars.map((style, i) => <div key={i} className="star" style={style} />)}
 
         <div className="auth-content">
-          <div style={{ display: "flex", gap: "10px", alignItems: "center", justifyContent: "center", marginBottom: "3rem" }}>
+          <div className="auth-brand">
             <div className="auth-logo-box"><Sparkles size={20} color="white" /></div>
-            <div style={{ textAlign: "left" }}>
-              <strong style={{ fontSize: "1.2rem" }}>LoyaltiKu</strong>
-              <div style={{ fontSize: "10px", color: "rgba(255,255,255,0.4)" }}>UMKM CRM</div>
+            <div className="auth-brand-text">
+              <strong className="auth-brand-title">LoyaltiKu</strong>
+              <div className="auth-brand-subtitle">UMKM CRM</div>
             </div>
           </div>
-          <h1 style={{ fontSize: "2.5rem", marginBottom: "1rem", fontWeight: "bold" }}>
+          <h1 className="auth-title">
             SELAMAT <br/><span className="text-gradient">DATANG</span><br/>KEMBALI!
           </h1>
-          <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.875rem" }}>Masuk untuk mengelola loyalitas pelanggan Anda</p>
+          <p className="auth-subtitle">Masuk untuk mengelola loyalitas pelanggan Anda</p>
         </div>
       </div>
 
@@ -89,59 +94,57 @@ export default function LoginPage() {
       <div className="auth-right">
         <div className="auth-right-bg"></div>
         <div className="form-wrapper">
-          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-            <div>
+          <form onSubmit={handleSubmit} className="form-layout" noValidate>
+            <div className="form-header">
               <h2>Masuk ke Akun</h2>
-              <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.875rem", marginTop: "0.5rem", marginBottom: "1rem" }}>
-                Masukkan email dan password Anda
-              </p>
+              <p>Masukkan email dan password Anda</p>
             </div>
 
-            <div className="input-group">
+            <div className={`input-group ${errors.email ? "has-error" : ""}`}>
               <Mail size={16} className="input-icon" />
               <input 
                 type="email" 
                 placeholder="Email" 
                 className="form-input" 
                 value={form.email} 
-                onChange={(e) => update("email", e.target.value)} 
-                required 
+                onChange={(e) => { update("email", e.target.value); if (errors.email) setErrors((p) => ({ ...p, email: undefined })); }} 
               />
             </div>
+            {errors.email && <span className="field-error">{errors.email}</span>}
             
-            <div className="input-group">
+            <div className={`input-group ${errors.password ? "has-error" : ""}`}>
               <Lock size={16} className="input-icon" />
               <input 
                 type={showPass ? "text" : "password"} 
                 placeholder="Password" 
                 className="form-input" 
                 value={form.password} 
-                onChange={(e) => update("password", e.target.value)} 
-                required 
+                onChange={(e) => { update("password", e.target.value); if (errors.password) setErrors((p) => ({ ...p, password: undefined })); }} 
               />
               <button 
                 type="button" 
                 onClick={() => setShowPass(!showPass)} 
-                style={{ position: "absolute", right: "1rem", background: "none", border: "none", color: "rgba(255,255,255,0.4)", cursor: "pointer" }}
+                className="btn-icon-absolute"
               >
                 {showPass ? <EyeOff size={16}/> : <Eye size={16}/>}
               </button>
             </div>
+            {errors.password && <span className="field-error">{errors.password}</span>}
 
-            <div style={{ display: "flex", justifyContent: "flex-end" }}>
-              <Link href="/auth/forgot-password" style={{ color: "#fbbf24", fontSize: "0.75rem", textDecoration: "none", fontWeight: 500 }}>
+            <div className="form-actions">
+              <Link href="/auth/forgot-password" className="link-amber link-amber-sm">
                 Lupa Password?
               </Link>
             </div>
 
-            <button type="submit" className="btn-primary" disabled={loading} style={{ marginTop: "0.5rem" }}>
+            <button type="submit" className="auth-btn-primary" disabled={loading}>
               {loading ? "Memproses..." : <>Masuk <ArrowRight size={16} /></>}
             </button>
 
-            <div style={{ textAlign: "center", marginTop: "1rem" }}>
-              <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.875rem" }}>
+            <div className="auth-footer">
+              <p>
                 Belum punya akun?{" "}
-                <Link href="/auth/register" style={{ color: "#fbbf24", textDecoration: "none", fontWeight: 600 }}>
+                <Link href="/auth/register" className="link-amber">
                   Daftar di sini
                 </Link>
               </p>

@@ -1,96 +1,268 @@
-.auth-container { display: flex; min-height: 100vh; overflow: hidden; }
+/* =========================================
+   AUTH PAGES STYLE (Login & Register)
+========================================= */
 
-/* Panel Kiri (Animasi & Visual) */
-.auth-left {
-  display: none; width: 50%; position: relative;
-  flex-direction: column; align-items: center; justify-content: center;
-  padding: 4rem; overflow: hidden;
+.auth-container { 
+  display: flex; 
+  min-height: 100vh; 
+  overflow: hidden; 
+  background-color: #0a0a0f; 
+  color: #fff; 
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
-@media (min-width: 1024px) { .auth-left { display: flex; } }
+
+/* --- KIRI: PANEL VISUAL --- */
+.auth-left {
+  display: none; 
+  width: 50%; 
+  position: relative;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center;
+  padding: 4rem; 
+  overflow: hidden;
+}
+@media (min-width: 1024px) { 
+  .auth-left { display: flex; } 
+}
 
 .auth-bg-gradient {
   position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(to bottom right, #0f0f1a, #12101f, #0a0a10);
 }
 
-.glow-circle { position: absolute; border-radius: 50%; filter: blur(80px); z-index: 2; }
-.glow-amber { background-color: rgba(245, 158, 11, 0.08); width: 400px; height: 400px; top: -80px; right: -80px; }
-.glow-orange { background-color: rgba(234, 88, 12, 0.08); width: 300px; height: 300px; bottom: -60px; left: -40px; }
+.glow-circle { 
+  position: absolute; border-radius: 50%; filter: blur(80px); z-index: 2; 
+}
+.glow-amber { 
+  background-color: rgba(245, 158, 11, 0.08); width: 400px; height: 400px; top: -80px; right: -80px; 
+}
+.glow-orange { 
+  background-color: rgba(234, 88, 12, 0.08); width: 300px; height: 300px; bottom: -60px; left: -40px; 
+}
 
-.star { position: absolute; border-radius: 50%; background: #fff; z-index: 2; }
+.star { 
+  position: absolute; border-radius: 50%; background: #fff; 
+  animation: twinkle 3s infinite ease-in-out; pointer-events: none; z-index: 2;
+}
 
-.auth-content { position: relative; z-index: 10; text-align: center; max-width: 350px; }
-.auth-logo-box { width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(to bottom right, #fbbf24, #f97316); display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 15px -3px rgba(245, 158, 11, 0.3); }
+.auth-content { 
+  position: relative; z-index: 10; text-align: center; 
+}
+.auth-brand { 
+  display: flex; gap: 10px; align-items: center; justify-content: center; margin-bottom: 3rem; 
+}
+.auth-logo-box { 
+  width: 40px; height: 40px; border-radius: 10px; 
+  background: linear-gradient(135deg, #f59e0b, #f97316); 
+  display: flex; align-items: center; justify-content: center; 
+}
+.auth-brand-text { text-align: left; }
+.auth-brand-title { font-size: 1.2rem; font-weight: bold; }
+.auth-brand-subtitle { 
+  font-size: 10px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; 
+}
 
-/* Panel Kanan (Form) */
-.auth-right { width: 100%; display: flex; align-items: center; justify-content: center; padding: 2rem; position: relative; }
-@media (min-width: 1024px) { .auth-right { width: 50%; } }
-.auth-right-bg { position: absolute; inset: 0; background-color: #0d0d14; z-index: 1; }
+.auth-title { 
+  font-size: 2.5rem; margin-bottom: 1rem; font-weight: 800; line-height: 1.2; 
+}
+.text-gradient { 
+  background: linear-gradient(to right, #fbbf24, #f97316); 
+  -webkit-background-clip: text; color: transparent; 
+}
+.auth-subtitle { color: rgba(255,255,255,0.4); font-size: 0.875rem; line-height: 1.5; }
 
-.form-wrapper { width: 100%; max-width: 400px; position: relative; z-index: 10; display: flex; flex-direction: column; gap: 1.5rem; }
+/* --- KANAN: PANEL FORM --- */
+.auth-right {
+  width: 100%; display: flex; align-items: center; justify-content: center;
+  padding: 2rem; position: relative; z-index: 10;
+}
+@media (min-width: 1024px) { 
+  .auth-right { width: 50%; } 
+}
 
-/* Form Elements */
+.auth-right-bg { 
+  position: absolute; inset: 0; background: #0a0a0f; z-index: 1; 
+}
+.form-wrapper { 
+  width: 100%; max-width: 400px; position: relative; z-index: 2; 
+}
+
+.form-layout { display: flex; flex-direction: column; gap: 1.25rem; }
+.form-header h2 { font-size: 1.5rem; font-weight: bold; }
+.form-header p { 
+  color: rgba(255,255,255,0.4); font-size: 0.875rem; margin-top: 0.5rem; margin-bottom: 1rem; 
+}
+
+/* --- INPUT & BUTTONS --- */
 .input-group { position: relative; display: flex; align-items: center; }
-.input-icon { position: absolute; left: 1rem; color: rgba(255,255,255,0.3); transition: color 0.3s; }
-.input-group:focus-within .input-icon { color: #fbbf24; }
-
+.input-icon { position: absolute; left: 1rem; color: rgba(255,255,255,0.4); }
 .form-input {
-  width: 100%; padding: 0.9rem 1rem 0.9rem 2.8rem;
-  background-color: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px; color: #fff; font-size: 0.875rem; font-family: inherit; transition: all 0.3s;
+  width: 100%; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px; padding: 0.875rem 1rem 0.875rem 2.75rem; color: #fff; font-size: 0.875rem;
+  transition: all 0.3s;
 }
-.form-input:focus { outline: none; border-color: rgba(245, 158, 11, 0.5); background-color: rgba(255, 255, 255, 0.08); }
-.form-input::placeholder { color: rgba(255, 255, 255, 0.25); }
+.form-input:focus { 
+  outline: none; border-color: rgba(251, 191, 36, 0.5); background: rgba(255, 255, 255, 0.05); 
+}
+.form-input.pl-4 { padding-left: 1rem; } /* Override icon padding */
+.form-input::placeholder { color: rgba(255,255,255,0.3); }
 
-.btn-primary {
-  width: 100%; padding: 0.9rem; background: linear-gradient(to right, #f59e0b, #f97316);
-  color: #000; font-weight: bold; font-size: 0.875rem; border: none; border-radius: 12px;
+.btn-icon-absolute { 
+  position: absolute; right: 1rem; background: none; border: none; 
+  color: rgba(255,255,255,0.4); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; 
+}
+.btn-icon-absolute:hover { color: #fff; }
+
+.form-actions { display: flex; justify-content: flex-end; }
+.link-amber { 
+  color: #fbbf24; font-size: 0.875rem; text-decoration: none; font-weight: 600; transition: color 0.3s; 
+}
+.link-amber:hover { color: #f59e0b; }
+.link-amber-sm { font-size: 0.75rem; font-weight: 500; }
+
+.auth-btn-primary {
+  width: 100%; padding: 0.875rem; background: linear-gradient(to right, #f59e0b, #ea580c);
+  color: #fff; font-weight: bold; font-size: 0.875rem; border: none; border-radius: 12px;
   cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-  box-shadow: 0 10px 15px -3px rgba(245, 158, 11, 0.2); transition: opacity 0.3s; font-family: inherit;
+  transition: all 0.3s; margin-top: 0.5rem;
 }
-.btn-primary:hover { opacity: 0.9; }
-.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
-
-.btn-secondary {
-  padding: 0.9rem 1.25rem; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.6); font-weight: 500; font-size: 0.875rem; border-radius: 12px;
-  cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: background 0.3s;
+.auth-btn-primary:hover:not(:disabled) { 
+  opacity: 0.9; transform: translateY(-1px); box-shadow: 0 10px 20px rgba(245, 158, 11, 0.2); 
 }
-.btn-secondary:hover { background: rgba(255, 255, 255, 0.08); color: #fff; }
+.auth-btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
 
-/* Utilities */
-.text-amber { color: #fbbf24; }
-.text-gradient { background: linear-gradient(to right, #fbbf24, #f97316); -webkit-background-clip: text; color: transparent; }
-.flex-row { display: flex; flex-direction: row; gap: 0.5rem; }
+.auth-btn-secondary {
+  width: 100%; padding: 0.875rem; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff; font-weight: bold; font-size: 0.875rem; border-radius: 12px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; transition: all 0.3s;
+}
+.auth-btn-secondary:hover { background: rgba(255, 255, 255, 0.1); }
 
-/* Pilihan Jenis Usaha (Store Type) */
-.store-type-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.auth-footer { text-align: center; margin-top: 1.5rem; }
+.auth-footer p { color: rgba(255,255,255,0.4); font-size: 0.875rem; }
+
+/* --- STORE TYPE GRID (REGISTER) --- */
+.store-type-label { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-bottom: 0.5rem; display: block; }
+.store-type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+.btn-store-type {
+  padding: 0.75rem 0.5rem; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255,255,255,0.6); font-size: 0.75rem; border-radius: 8px; cursor: pointer; transition: all 0.2s;
+}
+.btn-store-type:hover { background: rgba(255, 255, 255, 0.08); color: #fff; }
+.btn-store-type.selected { background: rgba(245, 158, 11, 0.15); border-color: #fbbf24; color: #fbbf24; font-weight: 600; }
+
+/* --- UTILITIES --- */
+.flex-row { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
+.text-success { color: #4ade80; }
+.text-center { text-align: center; }
+.mt-8 { margin-top: 2rem; }
+.mb-4 { margin-bottom: 1rem; }
+
+/* Forgot-Password */
+.link-hover-white {
+  transition: color 0.3s;
+}
+.link-hover-white:hover {
+  color: #fff !important;
+}
+
+/* --- JOIN MEMBER PAGE SPECIFIC --- */
+.auth-center-wrapper {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+.join-form-box {
+  background: rgba(10, 10, 15, 0.8);
+  padding: 2.5rem 2rem;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  width: 100%;
+  max-width: 400px;
+}
+
+.success-circle {
+  width: 60px;
+  height: 60px;
+  background: #10b981;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+}
+
+/* --- Glow posisi alternatif (dipakai di halaman Forgot Password) --- */
+.glow-orange-bottom {
+  bottom: -40px;
+  right: -60px;
+  left: auto;
+}
+
+/* --- Link putih dengan efek opacity hover (dipakai di footer form) --- */
+.auth-link-muted {
+  color: #fff;
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: opacity 0.3s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   gap: 0.5rem;
 }
+.auth-link-muted:hover {
+  opacity: 0.8;
+}
 
-.btn-store-type {
-  padding: 0.75rem;
+/* --- Lingkaran ikon amber (dipakai di state "email terkirim") --- */
+.icon-circle-amber {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(to bottom right, #f59e0b, #ea580c);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+/* --- Pesan validasi custom (pengganti tooltip bawaan browser) --- */
+.field-error {
+  display: block;
+  color: #f87171;
   font-size: 0.75rem;
-  border-radius: 0.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.03);
-  color: rgba(255, 255, 255, 0.4);
-  cursor: pointer;
-  transition: all 0.2s;
-  text-align: left;
-  font-family: inherit;
-  font-weight: 500;
+  margin-top: -0.75rem;
+  margin-bottom: -0.25rem;
+  padding-left: 0.25rem;
+}
+.input-group.has-error .form-input {
+  border-color: rgba(248, 113, 113, 0.6);
+}
+.form-message {
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  font-size: 0.875rem;
+  text-align: center;
+}
+.form-message.success {
+  background-color: #dcfce3;
+  color: #166534;
+}
+.form-message.error {
+  background-color: #fee2e2;
+  color: #991b1b;
 }
 
-.btn-store-type:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.btn-store-type.selected {
-  background: rgba(245, 158, 11, 0.15);
-  border-color: rgba(245, 158, 11, 0.4);
-  color: #fbbf24;
+/* --- Panel kanan berdiri sendiri tanpa panel kiri (mis. Reset Password) --- */
+.auth-right.auth-right-full {
+  width: 100%;
 }

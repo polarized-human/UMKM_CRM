@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Member } from "@/data/members";
 import { TierBadge, TierRing } from "@/components/ui/TierBadge";
 import { Search, CreditCard, Gift, QrCode } from "lucide-react";
-import "@/css/cashier/style.css"; 
+import "@/css/cashier/components.css";
 
 interface MemberListProps {
   members: Member[];

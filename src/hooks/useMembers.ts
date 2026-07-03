@@ -97,6 +97,8 @@ export function useMembers() {
 
     try {
       // 1. Tembak API Backend
+      // Kirim null (bukan string kosong) untuk field opsional yang tidak diisi,
+      // supaya tidak dianggap "duplikat" oleh validasi unique di backend.
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/customers`, {
         method: "POST",
         headers: {
@@ -107,17 +109,31 @@ export function useMembers() {
         body: JSON.stringify({
           name: newMember.name,
           phone: newMember.phone,
-          email: newMember.email,
-          birth_date: newMember.birthDate
+          email: newMember.email && newMember.email.trim() !== "" ? newMember.email.trim() : null,
+          birth_date: newMember.birthDate && newMember.birthDate.trim() !== "" ? newMember.birthDate : null
         })
       });
 
+      const result = await response.json().catch(() => null);
+
       if (!response.ok) {
-        throw new Error("Gagal menyimpan data ke server.");
+        // Kumpulkan semua pesan error validasi dari backend (format Laravel: { errors: { field: [pesan] } })
+        const errorMessages: string[] = result?.errors
+          ? (Object.values(result.errors).flat() as string[])
+          : [];
+        const combinedMessage = errorMessages.join(" ") || result?.message || "";
+
+        if (/email/i.test(combinedMessage) && /taken|sudah|terdaftar|unique/i.test(combinedMessage)) {
+          showToast("danger", "Email Sudah Terdaftar", "Email tersebut sudah digunakan oleh member lain. Gunakan email lain atau kosongkan saja.");
+        } else if (/phone|hp|nomor/i.test(combinedMessage) && /taken|sudah|terdaftar|unique/i.test(combinedMessage)) {
+          showToast("danger", "Nomor HP Sudah Terdaftar", "Nomor WhatsApp tersebut sudah digunakan oleh member lain.");
+        } else {
+          showToast("danger", "Gagal Menyimpan", combinedMessage || "Gagal menyimpan data ke server.");
+        }
+        return;
       }
 
       // 2. Ambil data balasan dari server
-      const result = await response.json();
       const dbCustomer = result.data;
 
       // 3. Format kembali agar cocok dengan UI React

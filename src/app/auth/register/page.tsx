@@ -1,20 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Eye, EyeOff, Mail, Lock, User, Phone, Building2, Sparkles, ArrowRight, ArrowLeft, Check } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, User, Phone, Building2, Sparkles, ArrowRight, ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import "@/css/auth/style.css"; // IMPORT CSS KHUSUS AUTH
+import "@/css/auth/style.css"; 
 
-const steps = ["Akun", "Bisnis", "Selesai"];
-const storeTypes = ["Fashion & Pakaian", "Makanan & Minuman", "Kecantikan & Perawatan", "Elektronik", "Kebutuhan Rumah", "Lainnya"];
+// Data statis dikeluarkan agar tidak membebani render ulang
+const STORE_TYPES = ["Fashion & Pakaian", "Makanan & Minuman", "Kecantikan & Perawatan", "Elektronik", "Kebutuhan Rumah", "Lainnya"];
 
 export default function RegisterPage() {
   const [step, setStep] = useState(0);
-    const [sent, setSent] = useState(false);
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", phone: "", password: "", storeName: "", storeType: "", city: "" });
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [stars, setStars] = useState<React.CSSProperties[]>([]);
+  const baseUrl = '/api';
 
   useEffect(() => {
     setStars([...Array(35)].map(() => ({
@@ -24,14 +25,35 @@ export default function RegisterPage() {
     })));
   }, []);
 
-  const update = (k: string, v: string) => setForm((prev) => ({ ...prev, [k]: v }));
-  const handleNext = (e: React.FormEvent) => { e.preventDefault(); if (step < 2) setStep(step + 1); };
+  const update = (k: string, v: string) => {
+    setForm((prev) => ({ ...prev, [k]: v }));
+    if (errors[k]) setErrors((prev) => ({ ...prev, [k]: "" }));
+  };
+  
+  const handleNext = (e: React.FormEvent) => { 
+    e.preventDefault(); 
+    const newErrors: Record<string, string> = {};
+    if (!form.name.trim()) newErrors.name = "Kolom wajib diisi";
+    if (!form.email.trim()) newErrors.email = "Kolom wajib diisi";
+    if (!form.phone.trim()) newErrors.phone = "Kolom wajib diisi";
+    if (!form.password.trim()) newErrors.password = "Kolom wajib diisi";
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) return;
+    if (step < 2) setStep(step + 1); 
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const newErrors: Record<string, string> = {};
+    if (!form.storeName.trim()) newErrors.storeName = "Kolom wajib diisi";
+    if (!form.city.trim()) newErrors.city = "Kolom wajib diisi";
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) return;
+
     setLoading(true);
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/register`, {
+      const response = await fetch(`${baseUrl}/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'ngrok-skip-browser-warning': 'true' },
         body: JSON.stringify(form)
@@ -47,7 +69,7 @@ export default function RegisterPage() {
 
   return (
     <div className="auth-container">
-      {/* KIRI */}
+      {/* KIRI - Visual */}
       <div className="auth-left">
         <div className="auth-bg-gradient"></div>
         <div className="glow-circle glow-amber"></div>
@@ -55,50 +77,65 @@ export default function RegisterPage() {
         {stars.map((style, i) => <div key={i} className="star" style={style} />)}
 
         <div className="auth-content">
-          <div style={{ display: "flex", gap: "10px", alignItems: "center", justifyContent: "center", marginBottom: "3rem" }}>
+          <div className="auth-brand">
             <div className="auth-logo-box"><Sparkles size={20} color="white" /></div>
-            <div style={{ textAlign: "left" }}>
-              <strong style={{ fontSize: "1.2rem" }}>LoyaltiKu</strong>
-              <div style={{ fontSize: "10px", color: "rgba(255,255,255,0.4)" }}>UMKM CRM</div>
+            <div className="auth-brand-text">
+              <strong className="auth-brand-title">LoyaltiKu</strong>
+              <div className="auth-brand-subtitle">UMKM CRM</div>
             </div>
           </div>
-          <h1 style={{ fontSize: "2.5rem", marginBottom: "1rem", fontWeight: "bold" }}>MULAI <br/><span className="text-gradient">PERJALANAN</span><br/>BISNISMU!</h1>
+          <h1 className="auth-title">
+            MULAI <br/><span className="text-gradient">PERJALANAN</span><br/>BISNISMU!
+          </h1>
         </div>
       </div>
 
-      {/* KANAN */}
+      {/* KANAN - Form */}
       <div className="auth-right">
         <div className="auth-right-bg"></div>
         <div className="form-wrapper">
           
           {step === 0 && (
-            <form onSubmit={handleNext} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-              <h2>Buat Akun</h2>
-              <div className="input-group">
+            <form onSubmit={handleNext} className="form-layout" noValidate>
+              <div className="form-header">
+                <h2>Buat Akun</h2>
+              </div>
+              
+              <div className={`input-group ${errors.name ? "has-error" : ""}`}>
                 <User size={16} className="input-icon" />
-                <input type="text" placeholder="Nama Lengkap" className="form-input" value={form.name} onChange={(e) => update("name", e.target.value)} required />
+                <input type="text" placeholder="Nama Lengkap" className="form-input" value={form.name} onChange={(e) => update("name", e.target.value)} />
               </div>
-              <div className="input-group">
+              {errors.name && <span className="field-error">{errors.name}</span>}
+              
+              <div className={`input-group ${errors.email ? "has-error" : ""}`}>
                 <Mail size={16} className="input-icon" />
-                <input type="email" placeholder="Email" className="form-input" value={form.email} onChange={(e) => update("email", e.target.value)} required />
+                <input type="email" placeholder="Email" className="form-input" value={form.email} onChange={(e) => update("email", e.target.value)} />
               </div>
-              <div className="input-group">
+              {errors.email && <span className="field-error">{errors.email}</span>}
+              
+              <div className={`input-group ${errors.phone ? "has-error" : ""}`}>
                 <Phone size={16} className="input-icon" />
-                <input type="tel" placeholder="Nomor HP" className="form-input" value={form.phone} onChange={(e) => update("phone", e.target.value)} required />
+                <input type="tel" placeholder="Nomor HP" className="form-input" value={form.phone} onChange={(e) => update("phone", e.target.value)} />
               </div>
-              <div className="input-group">
+              {errors.phone && <span className="field-error">{errors.phone}</span>}
+              
+              <div className={`input-group ${errors.password ? "has-error" : ""}`}>
                 <Lock size={16} className="input-icon" />
-                <input type={showPass ? "text" : "password"} placeholder="Password" className="form-input" value={form.password} onChange={(e) => update("password", e.target.value)} required />
-                <button type="button" onClick={() => setShowPass(!showPass)} style={{ position: "absolute", right: "1rem", background: "none", border: "none", color: "rgba(255,255,255,0.4)", cursor: "pointer" }}>
+                <input type={showPass ? "text" : "password"} placeholder="Password" className="form-input" value={form.password} onChange={(e) => update("password", e.target.value)} />
+                <button type="button" onClick={() => setShowPass(!showPass)} className="btn-icon-absolute">
                   {showPass ? <EyeOff size={16}/> : <Eye size={16}/>}
                 </button>
               </div>
-              <button type="submit" className="btn-primary">Lanjut <ArrowRight size={16} /></button>
+              {errors.password && <span className="field-error">{errors.password}</span>}
+              
+              <button type="submit" className="auth-btn-primary">
+                Lanjut <ArrowRight size={16} />
+              </button>
 
-              <div style={{ textAlign: "center", marginTop: "0.5rem" }}>
-                <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.875rem" }}>
+              <div className="auth-footer">
+                <p>
                   Sudah punya akun?{" "}
-                  <Link href="/auth/login" style={{ color: "#fbbf24", textDecoration: "none", fontWeight: 600 }}>
+                  <Link href="/auth/login" className="link-amber">
                     Masuk di sini
                   </Link>
                 </p>
@@ -107,22 +144,22 @@ export default function RegisterPage() {
           )}
 
           {step === 1 && (
-            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-              <div>
+            <form onSubmit={handleSubmit} className="form-layout" noValidate>
+              <div className="form-header">
                 <h2>Info Toko</h2>
-                <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.875rem", marginTop: "0.25rem" }}>Data toko atau usaha Anda</p>
+                <p>Data toko atau usaha Anda</p>
               </div>
 
-              <div className="input-group">
+              <div className={`input-group ${errors.storeName ? "has-error" : ""}`}>
                 <Building2 size={16} className="input-icon" />
-                <input type="text" placeholder="Nama Toko" className="form-input" value={form.storeName} onChange={(e) => update("storeName", e.target.value)} required />
+                <input type="text" placeholder="Nama Toko" className="form-input" value={form.storeName} onChange={(e) => update("storeName", e.target.value)} />
               </div>
+              {errors.storeName && <span className="field-error">{errors.storeName}</span>}
 
-              {/* INI BAGIAN YANG SEMPAT HILANG */}
               <div>
-                <p style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>Jenis Usaha</p>
+                <span className="store-type-label">Jenis Usaha</span>
                 <div className="store-type-grid">
-                  {storeTypes.map((t) => (
+                  {STORE_TYPES.map((t) => (
                     <button
                       key={t}
                       type="button"
@@ -135,13 +172,16 @@ export default function RegisterPage() {
                 </div>
               </div>
 
-              <div className="input-group">
-                <input type="text" placeholder="Kota / Kabupaten" className="form-input" style={{ paddingLeft: "1rem" }} value={form.city} onChange={(e) => update("city", e.target.value)} required />
+              <div className={`input-group ${errors.city ? "has-error" : ""}`}>
+                <input type="text" placeholder="Kota / Kabupaten" className="form-input pl-4" value={form.city} onChange={(e) => update("city", e.target.value)} />
               </div>
+              {errors.city && <span className="field-error">{errors.city}</span>}
               
-              <div className="flex-row" style={{ marginTop: "0.5rem" }}>
-                <button type="button" onClick={() => setStep(0)} className="btn-secondary"><ArrowLeft size={16}/> Kembali</button>
-                <button type="submit" className="btn-primary" disabled={loading || !form.storeType}>
+              <div className="flex-row">
+                <button type="button" onClick={() => setStep(0)} className="auth-btn-secondary">
+                  <ArrowLeft size={16}/> Kembali
+                </button>
+                <button type="submit" className="auth-btn-primary" disabled={loading || !form.storeType}>
                   {loading ? "Memproses..." : "Daftar Sekarang"}
                 </button>
               </div>
@@ -149,12 +189,15 @@ export default function RegisterPage() {
           )}
 
           {step === 2 && (
-            <div style={{ textAlign: "center" }}>
-              <h2 style={{ color: "#4ade80", marginBottom: "1rem" }}>Berhasil! 🎉</h2>
-              <p>Akun {form.storeName} telah dibuat.</p>
-              <Link href="auth/login" style={{ textDecoration: "none" }}><button className="btn-primary" style={{ marginTop: "2rem" }}>Mulai Sekarang</button></Link>
+            <div className="text-center">
+              <h2 className="text-success mb-4 text-2xl font-bold">Berhasil! 🎉</h2>
+              <p className="text-muted text-sm">Akun {form.storeName} telah dibuat.</p>
+              <Link href="/auth/login">
+                <button className="auth-btn-primary mt-8">Mulai Sekarang</button>
+              </Link>
             </div>
           )}
+          
         </div>
       </div>
     </div>

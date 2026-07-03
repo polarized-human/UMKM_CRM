@@ -11,6 +11,7 @@
   --text-muted: rgba(255, 255, 255, 0.5);
   --border-light: rgba(255, 255, 255, 0.08);
   --card-bg: rgba(255, 255, 255, 0.03);
+  --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
 }
 
 .landing-layout *, .landing-layout *::before, .landing-layout *::after {
@@ -28,11 +29,47 @@
 
 .font-display {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  letter-spacing: -0.02em; /* Membuat heading lebih rapat dan rapi */
+  letter-spacing: -0.02em;
 }
 
 a { text-decoration: none; }
 ul { list-style: none; }
+
+/* --- TYPOGRAPHY & UTILITIES --- */
+.text-center { text-align: center; }
+.text-muted { color: var(--text-muted); }
+.text-primary { color: var(--primary); }
+.text-white { color: var(--text-main); }
+.text-xs { font-size: 10px; }
+.text-sm { font-size: 12px; }
+.text-base { font-size: 14px; }
+.text-lg { font-size: 18px; }
+.text-xl { font-size: 20px; }
+.text-4xl { font-size: 40px; }
+.font-bold { font-weight: 700; }
+.font-extrabold { font-weight: 800; }
+.uppercase { text-transform: uppercase; }
+
+/* Spacing Utilities */
+.mb-1 { margin-bottom: 4px; }
+.mb-2 { margin-bottom: 8px; }
+.mb-4 { margin-bottom: 16px; }
+.mb-6 { margin-bottom: 24px; }
+.mb-8 { margin-bottom: 32px; }
+.mt-2 { margin-top: 8px; }
+.mt-4 { margin-top: 16px; }
+
+/* Flex Utilities */
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-1 { flex: 1; }
+.gap-2 { gap: 8px; }
+.gap-4 { gap: 16px; }
+.gap-8 { gap: 32px; }
 
 /* --- LAYOUT UTILITIES --- */
 .container {
@@ -40,16 +77,6 @@ ul { list-style: none; }
   margin: 0 auto;
   padding: 0 24px;
 }
-
-.text-center { text-align: center; }
-.flex { display: flex; }
-.flex-col { display: flex; flex-direction: column; }
-.items-center { align-items: center; }
-.justify-between { justify-content: space-between; }
-.justify-center { justify-content: center; }
-.gap-2 { gap: 8px; }
-.gap-4 { gap: 16px; }
-.gap-8 { gap: 32px; }
 
 /* --- NAVBAR --- */
 .navbar {
@@ -67,7 +94,7 @@ ul { list-style: none; }
 .nav-logo-box {
   width: 32px; height: 32px;
   border-radius: 8px;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  background: var(--gradient-primary);
   display: flex; align-items: center; justify-content: center;
 }
 .nav-links { display: flex; gap: 8px; }
@@ -83,7 +110,7 @@ ul { list-style: none; }
   background-color: rgba(255, 255, 255, 0.05);
 }
 
-/* --- BUTTONS (Fixed untuk menghindari bentrok) --- */
+/* --- BUTTONS --- */
 .landing-btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   padding: 12px 24px;
@@ -91,12 +118,16 @@ ul { list-style: none; }
   font-weight: 600;
   font-size: 14px;
   transition: all 0.2s;
-  width: fit-content; /* Memaksa tombol agar tidak 100% width */
+  width: fit-content;
   cursor: pointer;
   border: none;
 }
+.landing-btn.lg {
+  padding: 16px 32px;
+  font-size: 16px;
+}
 .landing-btn-primary {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  background: var(--gradient-primary);
   color: #000;
   box-shadow: 0 10px 20px rgba(245, 158, 11, 0.2);
 }
@@ -134,6 +165,11 @@ ul { list-style: none; }
   font-size: 12px; color: var(--primary); font-weight: 600;
   margin-bottom: 32px;
 }
+.hero-badge-dot {
+  width: 6px; height: 6px;
+  background: var(--primary-hover);
+  border-radius: 50%;
+}
 .hero-title {
   font-size: clamp(40px, 6vw, 72px);
   font-weight: 800; line-height: 1.15;
@@ -143,25 +179,28 @@ ul { list-style: none; }
   font-size: 18px; color: var(--text-muted);
   max-width: 600px; margin: 0 auto 40px;
 }
-
 .gradient-text {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  background: var(--gradient-primary);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* --- GRIDS --- */
+/* --- GRIDS & SECTIONS --- */
 .section { padding: 100px 0; position: relative; }
+.section.border-y {
+  padding: 60px 0;
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+}
 .section-header { margin-bottom: 60px; text-align: center; }
 .section-title { font-size: 40px; font-weight: 800; margin-bottom: 16px; }
 .section-subtitle { font-size: 16px; color: var(--text-muted); }
 
-.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 32px; }
 .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
 .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
 
-/* --- CARDS --- */
+/* --- CARDS & FLOATING WIDGETS --- */
 .card {
   background: var(--card-bg);
   border: 1px solid var(--border-light);
@@ -181,27 +220,6 @@ ul { list-style: none; }
   display: flex; align-items: center; justify-content: center;
   margin-bottom: 20px;
 }
-
-/* --- GLOW & ANIMATIONS --- */
-.glow-blob {
-  position: absolute; border-radius: 50%; pointer-events: none;
-  filter: blur(80px); opacity: 0.5; z-index: -1;
-}
-
-@keyframes floatA { 0%,100%{transform:translateY(0) rotate(-1deg)} 50%{transform:translateY(-14px) rotate(1deg)} }
-@keyframes floatB { 0%,100%{transform:translateY(0) rotate(1deg)} 50%{transform:translateY(-10px) rotate(-1deg)} }
-@keyframes floatC { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-@keyframes slideUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
-
-.float-a { animation: floatA 6s ease-in-out infinite; }
-.float-b { animation: floatB 7s ease-in-out infinite; animation-delay: 1s; }
-.float-c { animation: floatC 5s ease-in-out infinite; animation-delay: 2s; }
-.slide-up-1 { animation: slideUp 0.7s 0.1s forwards; opacity: 0; }
-.slide-up-2 { animation: slideUp 0.7s 0.2s forwards; opacity: 0; }
-.slide-up-3 { animation: slideUp 0.7s 0.3s forwards; opacity: 0; }
-.slide-up-4 { animation: slideUp 0.7s 0.4s forwards; opacity: 0; }
-
-/* --- FLOATING UI (Hero) --- */
 .floating-card {
   position: absolute;
   background: rgba(20, 20, 30, 0.9);
@@ -212,10 +230,34 @@ ul { list-style: none; }
   box-shadow: 0 20px 40px rgba(0,0,0,0.4);
   z-index: 10;
 }
+.floating-avatar {
+  width: 36px; height: 36px;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: bold; color: white;
+}
+
+/* --- GLOW & ANIMATIONS --- */
+.glow-blob {
+  position: absolute; border-radius: 50%; pointer-events: none;
+  filter: blur(80px); opacity: 0.5; z-index: -1;
+}
+@keyframes floatA { 0%,100%{transform:translateY(0) rotate(-1deg)} 50%{transform:translateY(-14px) rotate(1deg)} }
+@keyframes floatB { 0%,100%{transform:translateY(0) rotate(1deg)} 50%{transform:translateY(-10px) rotate(-1deg)} }
+@keyframes slideUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+@keyframes twinkle { 0%,100%{opacity:0.2} 50%{opacity:1} }
+
+.float-a { animation: floatA 6s ease-in-out infinite; }
+.float-b { animation: floatB 7s ease-in-out infinite; animation-delay: 1s; }
+.slide-up-1 { animation: slideUp 0.7s 0.1s forwards; opacity: 0; }
+.slide-up-2 { animation: slideUp 0.7s 0.2s forwards; opacity: 0; }
+.slide-up-3 { animation: slideUp 0.7s 0.3s forwards; opacity: 0; }
+.slide-up-4 { animation: slideUp 0.7s 0.4s forwards; opacity: 0; }
 
 /* --- RESPONSIVE MEDIA QUERIES --- */
 .mobile-only { display: none; }
-.desktop-only { display: block; } /* Fixed the flex bug */
+.desktop-only { display: block; } 
 
 @media (max-width: 768px) {
   .desktop-only { display: none !important; }

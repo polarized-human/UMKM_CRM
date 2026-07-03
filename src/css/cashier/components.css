@@ -1,0 +1,1062 @@
+/* =========================================
+   COMPONENTS.CSS - KHUSUS ADD MEMBER
+   ========================================= */
+
+/* --- 1. OVERLAY & KOTAK POP-UP --- */
+.modal-overlay { 
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
+  background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px); 
+  display: flex; align-items: center; justify-content: center; z-index: 1000; 
+}
+.modal-card-solid { 
+  background-color: #1f2937; border-radius: 1rem; padding: 2rem; 
+  border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); 
+  width: 100%; max-width: 500px; 
+}
+
+/* --- 2. HEADER FORM --- */
+.panel-header { 
+  padding: 0 0 1.25rem 0; margin-bottom: 1.25rem; 
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+  display: flex; align-items: center; justify-content: space-between; 
+}
+.panel-title { 
+  font-size: 1.125rem; font-weight: 600; color: #fff; 
+  display: flex; align-items: center; gap: 0.5rem; margin: 0; 
+}
+
+/* --- 3. INPUT FORM --- */
+.form-group { margin-bottom: 1.25rem; }
+.form-label { display: block; font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-bottom: 0.5rem; }
+.dash-input { 
+  width: 100%; padding: 0.75rem 1rem; background-color: rgba(0,0,0,0.2); 
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 0.5rem; color: white; 
+  outline: none; transition: border-color 0.2s; 
+}
+.dash-input:focus { border-color: #fbbf24; }
+
+/* --- 4. TOMBOL AKSI --- */
+.btn-warning-solid { 
+  background-color: #fbbf24; color: #000; font-weight: 600; 
+  padding: 0.75rem 1.5rem; border: none; border-radius: 0.5rem; 
+  cursor: pointer; transition: background 0.2s; 
+}
+.btn-warning-solid:hover { background-color: #f59e0b; }
+
+.btn-cancel-outline { 
+  background-color: transparent; color: rgba(255,255,255,0.6); 
+  border: 1px solid rgba(255,255,255,0.2); padding: 0.75rem 1.5rem; 
+  border-radius: 0.5rem; cursor: pointer; 
+}
+
+/* =========================================
+   COMPONENTS.CSS - KHUSUS MEMBER LIST
+   ========================================= */
+
+/* --- 1. LAYOUT UMUM & KOTAK PANEL --- */
+.dashboard-container { 
+  padding: 2rem; 
+  display: flex; 
+  flex-direction: column; 
+}
+
+/* Jika class ini sudah ada dari AddMember, tidak apa-apa biarkan saja menimpa, atau hapus salah satu */
+.panel-card { 
+  background-color: #161622; 
+  border: 1px solid rgba(255, 255, 255, 0.1); 
+  border-radius: 1rem; 
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+.panel-card:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* --- 2. TOMBOL HEADER (Atas Tabel) --- */
+.btn-secondary { 
+  background-color: rgba(255,255,255,0.1); 
+  color: #fff; 
+  padding: 0.5rem 1rem; 
+  border: none; 
+  border-radius: 0.5rem; 
+  cursor: pointer; 
+  transition: background 0.2s;
+}
+.btn-secondary:hover { 
+  background-color: rgba(255,255,255,0.15); 
+}
+
+.dash-btn-primary { 
+  background-color: #fbbf24; 
+  color: #000; 
+  padding: 0.5rem 1rem; 
+  border: none; 
+  border-radius: 0.5rem; 
+  font-weight: 600; 
+  cursor: pointer; 
+  transition: background 0.2s;
+}
+.dash-btn-primary:hover { 
+  background-color: #f59e0b; 
+}
+
+/* --- 3. GAYA TABEL --- */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto; /* Agar tidak rusak jika layar kecil */
+}
+.member-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+.member-table th {
+  padding: 1.25rem 1rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.member-table td {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  vertical-align: middle;
+}
+.member-row {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.member-row:hover {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+/* --- 4. TOMBOL AKSI DALAM TABEL --- */
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end; /* Meratakan tombol ke kanan */
+}
+
+.btn-redeem { 
+  background: rgba(16, 185, 129, 0.1); 
+  color: #10b981; 
+  border: 1px solid rgba(16, 185, 129, 0.3); 
+  padding: 0.5rem 1rem; 
+  border-radius: 0.5rem; 
+  cursor: pointer; 
+  font-size: 0.75rem; 
+  font-weight: 500;
+  transition: all 0.2s;
+}
+.btn-redeem:hover { 
+  background: rgba(16, 185, 129, 0.2); 
+  border-color: #10b981; 
+}
+
+.btn-transaction { 
+  background: rgba(59, 130, 246, 0.1); 
+  color: #3b82f6; 
+  border: 1px solid rgba(59, 130, 246, 0.3); 
+  padding: 0.5rem 1rem; 
+  border-radius: 0.5rem; 
+  cursor: pointer; 
+  font-size: 0.75rem; 
+  font-weight: 500;
+  display: flex; 
+  align-items: center; 
+  gap: 0.25rem; 
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.btn-transaction:hover { 
+  background: rgba(59, 130, 246, 0.2); 
+  border-color: #3b82f6; 
+}
+
+
+/* =========================================
+   COMPONENTS.CSS - KHUSUS REWARDS CATALOG
+   ========================================= */
+
+/* --- 1. HEADER HALAMAN --- */
+.header-flex { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: flex-start; 
+}
+.page-title { 
+  font-size: 1.5rem; 
+  font-weight: bold; 
+  color: #fff; 
+  letter-spacing: -0.025em; 
+  margin-bottom: 0.25rem;
+}
+.page-subtitle { 
+  font-size: 0.875rem; 
+  color: rgba(255, 255, 255, 0.4); 
+}
+
+/* --- 2. GRID KARTU HADIAH --- */
+.rewards-grid { 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 1.5rem; 
+}
+
+/* --- 3. KARTU HADIAH (STAT CARD) --- */
+.stat-card {
+  background-color: rgba(255, 255, 255, 0.03); 
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 1rem; 
+  padding: 1.25rem; 
+  position: relative; 
+  overflow: hidden; 
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.stat-card:hover { 
+  border-color: #fbbf24; /* Memberikan efek menyala saat di-hover */
+  background-color: rgba(255, 255, 255, 0.05);
+}
+.stat-icon { 
+  width: 40px; 
+  height: 40px; 
+  border-radius: 0.75rem; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  margin-bottom: 1rem; 
+}
+.stat-value { 
+  font-size: 1.25rem; 
+  font-weight: bold; 
+  color: #fff; 
+  margin-bottom: 0.25rem;
+}
+.stat-label { 
+  font-size: 0.75rem; 
+  color: #fbbf24; 
+  font-weight: 500;
+}
+
+/* --- 4. MODAL REDEEM & INPUT SELECT --- */
+.modal-box { 
+  background-color: #1f2937; 
+  border-radius: 1rem; 
+  padding: 2rem; 
+  border: 1px solid rgba(255,255,255,0.1); 
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); 
+  width: 100%; 
+  max-width: 500px; 
+}
+.modal-title { 
+  font-size: 1.25rem; 
+  font-weight: bold; 
+  color: white; 
+}
+
+.input-select-solid { 
+  width: 100%; 
+  padding: 0.75rem 1rem; 
+  background-color: rgba(0,0,0,0.2); 
+  border: 1px solid rgba(255,255,255,0.1); 
+  border-radius: 0.5rem; 
+  color: white; 
+  outline: none; 
+  transition: border-color 0.2s; 
+  appearance: none; /* Menghilangkan panah bawaan browser */
+}
+.input-select-solid:focus { 
+  border-color: #fbbf24; 
+}
+.input-select-solid option {
+  background-color: #1f2937;
+  color: white;
+}
+
+/* =========================================
+   COMPONENTS.CSS - KHUSUS SIDEBAR
+   ========================================= */
+
+.sidebar {
+  width: 250px;
+  background-color: rgba(255, 255, 255, 0.02);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-logo {
+  width: 32px; 
+  height: 32px; 
+  border-radius: 8px;
+  background: linear-gradient(to bottom right, #f59e0b, #ea580c);
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+}
+
+.sidebar-nav {
+  flex: 1; 
+  padding: 1.5rem 1rem; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 0.5rem; 
+  overflow-y: auto;
+}
+
+.nav-item {
+  display: flex; 
+  align-items: center; 
+  gap: 0.75rem; 
+  padding: 0.85rem 1rem; 
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.5); 
+  font-size: 0.875rem; 
+  font-weight: 500; 
+  cursor: pointer;
+  background: transparent; 
+  border: none; 
+  width: 100%; 
+  text-align: left; 
+  transition: all 0.2s ease;
+}
+
+.nav-item:hover { 
+  background-color: rgba(255, 255, 255, 0.05); 
+  color: rgba(255, 255, 255, 0.8); 
+}
+
+.nav-item.active { 
+  background-color: rgba(245, 158, 11, 0.1); 
+  color: #fbbf24; 
+}
+
+.sidebar-footer {
+  padding: 1.5rem 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* =========================================
+   COMPONENTS.CSS - KHUSUS MEMBER DETAIL
+   ========================================= */
+
+/* Layout untuk membagi bagian kartu digital (kiri) dan data riwayat (kanan) */
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .detail-grid {
+    grid-template-columns: 1fr; /* Menjadi 1 kolom (atas-bawah) di layar kecil */
+  }
+}
+
+/* Kotak untuk setiap baris riwayat transaksi */
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 0.75rem;
+  margin-bottom: 0.75rem;
+  transition: background-color 0.2s;
+}
+.history-item:hover {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.history-date {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+.history-amount {
+  font-weight: bold;
+  color: #fff;
+}
+.history-points {
+  font-size: 0.875rem;
+  color: #10b981; /* Warna hijau emerald */
+  font-weight: 500;
+}
+
+/* =========================================
+   COMPONENTS.CSS - KHUSUS DASHBOARD
+   ========================================= */
+
+/* --- 1. UTILITIES (Warna Gradient Khusus Icon & Progress Bar) --- */
+.grad-blue    { background: linear-gradient(to bottom right, #3b82f6, #06b6d4); }
+.grad-emerald { background: linear-gradient(to bottom right, #10b981, #14b8a6); }
+.grad-amber   { background: linear-gradient(to bottom right, #f59e0b, #f97316); }
+.grad-rose    { background: linear-gradient(to bottom right, #f43f5e, #ec4899); }
+.grad-violet  { background: linear-gradient(to right, #a78bfa, #a855f7); }
+.grad-gold    { background: linear-gradient(to right, #fbbf24, #eab308); }
+.grad-silver  { background: linear-gradient(to right, #cbd5e1, #94a3b8); }
+.grad-bronze  { background: linear-gradient(to right, #ea580c, #b45309); }
+
+/* --- 2. GRID STATISTIK ATAS --- */
+.stats-grid { 
+  display: grid; 
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 1.25rem; 
+}
+/* Responsif agar tidak hancur di layar kecil/tablet */
+@media (max-width: 1024px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* --- 3. LIST NOTIFIKASI (Ulang Tahun & Aktivitas) --- */
+.notif-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.notif-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.875rem;
+  border-radius: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: background 0.2s;
+}
+.notif-item:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+.notif-icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.notif-content {
+  flex: 1;
+}
+.notif-time {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* --- 4. TIER DISTRIBUTION (Progress Bar) --- */
+.tier-panel-body {
+  padding: 0.875rem 1.125rem 1.125rem 1.125rem;
+}
+.tier-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.tier-progress-bg {
+  width: 100%;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  margin-top: 0.5rem;
+  overflow: hidden;
+}
+.tier-progress-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 1s ease-in-out;
+}
+
+/* =========================================
+   COMPONENTS.CSS - KHUSUS MODAL (TRANSAKSI & QR)
+   ========================================= */
+
+/* --- 1. KOTAK MODAL DASAR --- */
+/* (Catatan: .modal-overlay sudah kita buat sebelumnya di bagian AddMember) */
+.modal-box { 
+  background-color: #1f2937; 
+  border-radius: 1rem; 
+  padding: 2rem; 
+  border: 1px solid rgba(255,255,255,0.1); 
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); 
+  width: 100%; 
+  max-width: 500px; 
+}
+.modal-title { 
+  font-size: 1.25rem; 
+  font-weight: bold; 
+  color: white; 
+}
+.modal-actions { 
+  display: flex; 
+  gap: 1rem; 
+  margin-top: 1.5rem; 
+  justify-content: flex-end; 
+}
+
+/* --- 2. INPUT KHUSUS TRANSAKSI --- */
+.trx-input-group { 
+  margin-bottom: 1.5rem; 
+}
+.trx-label { 
+  display: block; 
+  color: rgba(255,255,255,0.6); 
+  margin-bottom: 0.5rem; 
+  font-size: 0.875rem; 
+}
+.trx-input { 
+  width: 100%; 
+  padding: 1rem; 
+  background: rgba(0,0,0,0.3); 
+  border: 1px solid rgba(255,255,255,0.2); 
+  border-radius: 0.5rem; 
+  color: white; 
+  font-size: 1.5rem; 
+  text-align: center; 
+  font-weight: bold; 
+  outline: none;
+  transition: border-color 0.2s;
+}
+.trx-input:focus {
+  border-color: #3b82f6; /* Warna biru saat input diklik */
+}
+.trx-preview { 
+  background: rgba(16, 185, 129, 0.1); 
+  border: 1px dashed rgba(16, 185, 129, 0.5); 
+  padding: 1rem; 
+  border-radius: 0.5rem; 
+  text-align: center; 
+  margin-bottom: 1.5rem; 
+  display: flex; 
+  flex-direction: column; 
+}
+
+/* =========================================
+   COMPONENTS.CSS - STRUKTUR GRID DASHBOARD
+   ========================================= */
+
+/* 1. Pembungkus Utama Halaman */
+.dashboard-container { 
+  padding: 2rem 2rem 3rem 2rem; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 1.75rem; 
+}
+
+/* 2. Header Dashboard (Judul & Subjudul) */
+.header-flex { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: flex-start; 
+}
+.page-title { 
+  font-size: 1.5rem; 
+  font-weight: bold; 
+  color: #fff; 
+  letter-spacing: -0.025em; 
+}
+.page-subtitle { 
+  font-size: 0.875rem; 
+  color: rgba(255, 255, 255, 0.4); 
+  margin-top: 0.25rem; 
+}
+
+/* 3. Grid 4 Kolom (Untuk Kartu Statistik Atas) */
+.stats-grid { 
+  display: grid; 
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 1.25rem; 
+}
+
+/* 4. Grid 3 Kolom (Reminder | Tier | Member Terbaru) */
+.dash-grid-3 { 
+  display: grid; 
+  grid-template-columns: repeat(3, minmax(0, 1fr)); 
+  gap: 1rem;
+  align-items: start;
+}
+/* Tetap 3 kolom sejajar sampai layar cukup sempit, baru ditumpuk */
+@media (max-width: 900px) {
+  .dash-grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 5. Desain Kartu Statistik */
+.stat-card {
+  background-color: #161622; 
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem; 
+  padding: 1.5rem; 
+  position: relative; 
+  overflow: hidden; 
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+.stat-card:hover { 
+  border-color: rgba(251, 191, 36, 0.4);
+  background-color: #1a1a2e;
+}
+.stat-icon { 
+  width: 44px; 
+  height: 44px; 
+  border-radius: 0.75rem; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  margin-bottom: 1.25rem; 
+}
+.stat-value { 
+  font-size: 1.75rem; 
+  font-weight: bold; 
+  color: #fff; 
+  letter-spacing: -0.025em; 
+  margin-bottom: 0.25rem;
+}
+.stat-label { 
+  font-size: 0.75rem; 
+  color: rgba(255, 255, 255, 0.5); 
+  margin-top: 0.125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.stat-sublabel {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.35);
+  margin-top: 0.35rem;
+}
+
+/* 6. Responsivitas (Agar tidak hancur di layar kecil) */
+@media (max-width: 1024px) {
+  .stats-grid { 
+    grid-template-columns: repeat(2, 1fr); 
+  }
+  /* Memaksa elemen yang mengambil 2 kolom (span 2) menjadi 1 kolom di layar kecil */
+  .panel-card[style] { 
+    grid-column: span 1 !important; 
+  }
+}
+/* =========================================
+   COMPONENTS.CSS - KHUSUS DASHBOARD CARDS
+   ========================================= */
+
+/* --- Panel Card Inner Padding --- */
+.panel-card .panel-header {
+  padding: 1rem 1.125rem 0.875rem 1.125rem;
+  margin-bottom: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.panel-card .panel-title {
+  font-size: 1rem;
+}
+
+/* --- Grid Column Span --- */
+.col-span-1 { grid-column: span 1; }
+.col-span-2 { grid-column: span 2; }
+
+/* --- Utility --- */
+.flex-1 { flex: 1; min-width: 0; }
+.text-right { text-align: right; }
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* --- Badge Ulang Tahun --- */
+.badge-rose {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #fb7185;
+  background: rgba(251, 113, 133, 0.1);
+  border: 1px solid rgba(251, 113, 133, 0.25);
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+}
+
+/* --- Scroll Area (Reminder Birthday) --- */
+.scroll-area {
+  padding: 0.625rem 1.125rem 1.125rem 1.125rem;
+  max-height: 230px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.1) transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.scroll-area::-webkit-scrollbar {
+  width: 4px;
+}
+.scroll-area::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scroll-area::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+}
+
+/* --- Reminder Item --- */
+.reminder-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.625rem;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: background 0.2s;
+}
+.reminder-item:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+/* --- Avatar Small --- */
+.avatar-sm {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+/* --- Icon Button (WhatsApp, dll) --- */
+.btn-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 0.5rem;
+  background: rgba(52, 211, 153, 0.1);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+.btn-icon:hover {
+  background: rgba(52, 211, 153, 0.2);
+  border-color: rgba(52, 211, 153, 0.5);
+}
+
+/* --- Activity List (Member Terbaru Aktif) --- */
+.activity-list {
+  padding: 0.625rem 1.125rem 1.125rem 1.125rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* --- Activity Item — layout vertikal agar tidak dempet di kolom sempit --- */
+.activity-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.875rem 1rem;
+  border-radius: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.activity-item:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+/* Baris atas: avatar + nama + badge */
+.activity-item-top {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  min-width: 0;
+}
+
+/* Baris bawah: info kunjungan + poin + tombol */
+.activity-item-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-left: 2.5rem; /* sejajar dengan teks nama (setelah avatar) */
+}
+
+/* --- Stat Sub Label --- */
+.stat-sub {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.3);
+  margin-top: 0.2rem;
+}
+/* =========================================
+   COMPONENTS.CSS - KHUSUS REWARDS CATALOG
+   ========================================= */
+
+.btn-reward-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+  padding: 0.65rem 1.25rem;
+  border-radius: 0.625rem;
+  background: rgba(251, 191, 36, 0.08);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  color: #fbbf24;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.btn-reward-outline:hover {
+  background: rgba(251, 191, 36, 0.18);
+  border-color: #fbbf24;
+  color: #fff;
+}
+.btn-reward-outline:active {
+  background: rgba(251, 191, 36, 0.28);
+}
+/* =========================================
+   COMPONENTS.CSS - KHUSUS MEMBER DETAIL
+   ========================================= */
+
+/* --- Layout Header (Kartu Kiri + Info Kanan) --- */
+.detail-header {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: flex-start;
+}
+@media (max-width: 900px) {
+  .detail-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* --- Kolom Info Kanan --- */
+.detail-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.detail-name {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.25rem;
+}
+
+.detail-phone {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 1.25rem;
+}
+
+/* --- Tombol Utama (Transaksi Baru) --- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  background: #3b82f6;
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.625rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+  text-decoration: none;
+  white-space: nowrap;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-primary:hover {
+  background: #2563eb;
+}
+.btn-primary:active {
+  transform: scale(0.97);
+}
+.btn-primary:focus-visible {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
+}
+
+/* --- Tombol Kirim Pengingat WA (disamakan ukurannya dgn .btn-primary) --- */
+.btn-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  background: #25D366;
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.625rem;
+  cursor: pointer;
+  transition: filter 0.2s, transform 0.1s, box-shadow 0.2s;
+  text-decoration: none;
+  white-space: nowrap;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-wa:hover {
+  filter: brightness(1.1);
+}
+.btn-wa:active {
+  transform: scale(0.97);
+}
+.btn-wa:focus-visible {
+  box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.4);
+}
+
+/* --- Tabel Riwayat Transaksi --- */
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.history-table thead tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.history-table th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.4);
+  white-space: nowrap;
+}
+
+.history-table td {
+  padding: 0.875rem 1rem;
+  color: rgba(255, 255, 255, 0.75);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  vertical-align: middle;
+}
+
+.history-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.history-table tbody tr {
+  transition: background 0.15s;
+}
+.history-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Warna mutasi poin */
+.type-earn {
+  font-weight: 700;
+  color: #34d399; /* hijau emerald */
+}
+.type-redeem {
+  font-weight: 700;
+  color: #f87171; /* merah rose */
+}
+
+/* =========================================
+   COMPONENTS.CSS - DASHBOARD TEXT UTILITIES
+   (pengganti inline style di Dashboard.tsx)
+   ========================================= */
+
+/* --- Header kanan (Hari ini + tanggal) --- */
+.today-label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+.today-date {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* --- Empty state (dipakai saat tidak ada ulang tahun, dsb) --- */
+.empty-state-text {
+  text-align: center;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.3);
+  padding: 2rem 0;
+}
+
+/* --- Reminder Item: nama & sisa hari --- */
+.reminder-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+}
+.reminder-days {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* --- Tier Distribution: baris nama/jumlah & persentase --- */
+.tier-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+}
+.tier-name {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+.tier-count {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+}
+.tier-percent {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+/* --- Activity Item (Member Terbaru Aktif): teks-teks --- */
+.activity-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: white;
+}
+.activity-visit {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.35);
+}
+.activity-points {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fbbf24;
+}
+.activity-spend {
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.7rem;
+}

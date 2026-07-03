@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Member } from "@/data/members";
 import { X } from "lucide-react";
-import "@/css/ui/style.css"; // Mengambil gaya dasar modal
+import "@/css/cashier/components.css";
 
 interface TransactionModalProps {
   member: Member;

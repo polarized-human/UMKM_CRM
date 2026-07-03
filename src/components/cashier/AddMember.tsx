@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowLeft, UserPlus } from "lucide-react";
+import { UserPlus } from "lucide-react";
 import { Member } from "@/data/members";
-import "@/css/cashier/style.css";
+import "@/css/cashier/components.css";
+import "@/css/cashier/animations.css";
 
 interface AddMemberProps {
   onBack: () => void;
@@ -37,19 +38,20 @@ export default function AddMember({ onBack, onSave }: AddMemberProps) {
   };
 
   return (
-    <div className="dashboard-container">
-      <button onClick={onBack} className="btn-secondary" style={{ width: "fit-content", marginBottom: "1rem" }}>
-        <ArrowLeft size={16} /> Kembali
-      </button>
-
-      <div className="panel-card" style={{ maxWidth: "500px" }}>
-        <div className="panel-header">
+    // 1. Menggunakan class modal-overlay bawaan dari style.css
+    <div className="modal-overlay animate-fade-in">
+      
+      {/* 2. Menggunakan modal-card-solid agar kotak form solid (tidak blur dengan background) */}
+      <div className="modal-card-solid animate-pop-in">
+        
+        {/* Header disesuaikan sedikit padding-nya agar pas dengan padding bawaan modal-card-solid */}
+        <div className="panel-header" style={{ padding: "0 0 1.25rem 0", marginBottom: "1.25rem" }}>
           <h3 className="panel-title" style={{ fontSize: "1.125rem" }}>
             <UserPlus size={18} color="#fbbf24" /> Daftarkan Member Baru
           </h3>
         </div>
         
-        <form onSubmit={handleSubmit} style={{ padding: "1.5rem" }}>
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label className="form-label">Nama Pelanggan *</label>
             <input 
@@ -97,8 +99,19 @@ export default function AddMember({ onBack, onSave }: AddMemberProps) {
             />
           </div>
 
-          <div style={{ marginTop: "2rem", display: "flex", justifyContent: "flex-end" }}>
-            <button type="submit" className="dash-btn-primary">
+          {/* 3. Tombol aksi berada sejajar di bawah dengan class bawaan CSS Anda */}
+          <div style={{ marginTop: "2rem", display: "flex", justifyContent: "flex-end", gap: "1rem" }}>
+            <button 
+              type="button" 
+              onClick={onBack} 
+              className="btn-cancel-outline"
+            >
+              Batal
+            </button>
+            <button 
+              type="submit" 
+              className="btn-warning-solid"
+            >
               Simpan Data Member
             </button>
           </div>

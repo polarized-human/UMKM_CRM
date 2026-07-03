@@ -6,6 +6,8 @@ import DigitalCard from "@/components/ui/DigitalCard";
 import { TierBadge } from "@/components/ui/TierBadge";
 import { ArrowLeft, CreditCard, History, Share2 } from "lucide-react";
 import ConfirmModal from "@/components/ui/ConfirmModal";
+import "@/css/cashier/components.css";
+
 
 interface MemberDetailProps {
   member: Member;
@@ -82,25 +84,16 @@ export default function MemberDetail({ member, onBack, onOpenTransaction, onDele
             </div>
 
             <div className="action-row" style={{ display: "flex", gap: "0.75rem", marginTop: "1.5rem" }}>
-              <button onClick={() => onOpenTransaction(member)} className="btn-primary" style={{ width: "fit-content" }}>
+              <button onClick={() => onOpenTransaction(member)} className="btn-primary">
                 <CreditCard size={16} /> Transaksi Baru
               </button>
 
-              <a 
-                href={waLink} 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href={waLink}
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => onSendWA && onSendWA(member.phone, member.name)}
-                style={{ 
-                  display: "flex", alignItems: "center", gap: "0.5rem", 
-                  background: "#25D366", color: "white", 
-                  padding: "0.5rem 1rem", borderRadius: "0.5rem", 
-                  border: "none", cursor: "pointer", 
-                  fontWeight: "bold", textDecoration: "none",
-                  fontSize: "0.875rem", transition: "all 0.2s ease-in-out"
-                }}
-                onMouseOver={(e) => e.currentTarget.style.filter = "brightness(1.1)"}
-                onMouseOut={(e) => e.currentTarget.style.filter = "brightness(1)"}
+                className="btn-wa"
               >
                 <Share2 size={16} /> Kirim Pengingat WA
               </a>

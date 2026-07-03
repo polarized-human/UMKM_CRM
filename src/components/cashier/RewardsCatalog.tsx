@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { Member } from "@/data/members";
 import { Gift, Coffee, Tag, CheckCircle } from "lucide-react";
 // Pastikan baris ini ada agar file CSS terbaca
-import "@/css/cashier/style.css"; 
+import "@/css/cashier/components.css";
+import "@/css/cashier/animations.css";
 
 interface RewardsCatalogProps {
   members: Member[];
@@ -81,8 +82,8 @@ export default function RewardsCatalog({ members, prefillMemberId, onClearPrefil
       </div>
 
       {selectedReward && (
-        <div className="modal-overlay">
-          <div className="panel-card modal-card-solid">
+        <div className="modal-overlay animate-fade-in">
+          <div className="panel-card modal-card-solid animate-pop-in">
             <h3 style={{ color: "white", marginBottom: "0.5rem", fontSize: "1.25rem" }}>Konfirmasi Penukaran</h3>
             <p style={{ color: "rgba(255,255,255,0.6)", marginBottom: "1.5rem", fontSize: "0.875rem" }}>
               Hadiah: <strong style={{ color: "#fbbf24" }}>{selectedReward.name}</strong> ({selectedReward.points} pts)
