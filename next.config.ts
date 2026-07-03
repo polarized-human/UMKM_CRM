@@ -6,7 +6,8 @@ const nextConfig: NextConfig = {
   '127.0.0.1',
   '192.168.1.20',
   '*.ngrok-free.dev',
-  '172.27.72.253'
+  '172.27.72.253',
+  'umkm-crm.vercel.app'
 ],
 
   async rewrites() {
