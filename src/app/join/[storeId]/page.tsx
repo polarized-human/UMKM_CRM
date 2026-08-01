@@ -100,7 +100,7 @@ export default function JoinMemberPage() {
                 </div>
               </div>
 
-              <button type="submit" className="btn-primary mt-4" disabled={loading}>
+              <button type="submit" className="auth-btn-primary mt-4" disabled={loading}>
                 {loading ? "Memproses..." : "Daftar Sekarang"}
               </button>
             </form>
