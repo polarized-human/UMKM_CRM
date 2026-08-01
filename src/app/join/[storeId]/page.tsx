@@ -26,14 +26,39 @@ export default function JoinMemberPage() {
     e.preventDefault();
     setLoading(true);
 
-    // TODO: Tembak API backend Laravel di sini
-    // POST /api/customers/join
-    // body: { store_id: storeId, ...form }
-    
-    setTimeout(() => {
-      setLoading(false);
+   try {
+      // Mengambil base URL dari environment Vercel, fallback ke localhost jika tidak ada
+      const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+      
+      const response = await fetch(`${baseUrl}/public/register-member`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          // Wajib ada agar request dari Vercel/HP tidak diblokir oleh layar peringatan Ngrok
+          "ngrok-skip-browser-warning": "true" 
+        },
+        body: JSON.stringify({
+          store_id: storeId,
+          name: form.name,
+          phone: form.phone,
+          birth_date: form.birthDate // Sesuaikan nama kolom ini dengan database Laravel Anda
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Pendaftaran gagal, silakan coba lagi.");
+      }
+
+      // Jika API mengembalikan response 200/201 (Sukses)
       setSuccess(true);
-    }, 1500);
+      
+    } catch (error) {
+      console.error("Error pendaftaran:", error);
+      alert("Terjadi kesalahan saat mendaftar. Pastikan koneksi stabil.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
